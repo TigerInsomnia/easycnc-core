@@ -18,7 +18,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Sqlserver"))
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgresql"))
 );
 
 
@@ -29,7 +29,7 @@ builder.Services.AddTransient<IPermissionService, PermissionService>();
 
 
 
-builder.Services.AddWorkflow(x=>x.UsePostgreSQL(builder.Configuration.GetConnectionString("SqlServer"),true,true));
+builder.Services.AddWorkflow(x=>x.UsePostgreSQL(builder.Configuration.GetConnectionString("Postgresql"),true,true));
 
 
 var app = builder.Build();

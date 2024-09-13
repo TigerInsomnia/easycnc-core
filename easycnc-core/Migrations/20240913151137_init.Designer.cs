@@ -2,9 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using easycnc_core.Data;
 
 #nullable disable
@@ -12,8 +12,8 @@ using easycnc_core.Data;
 namespace easycnc_core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240907100852_AddAddress")]
-    partial class AddAddress
+    [Migration("20240913151137_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,29 +21,29 @@ namespace easycnc_core.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.20")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("easycnc_core.Areas.System.Models.Dept", b =>
                 {
                     b.Property<int>("DeptId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("dept_id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeptId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DeptId"));
 
                     b.Property<string>("DeptCode")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("dept_code");
 
                     b.Property<string>("DeptName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("dept_name");
 
                     b.Property<int>("ParentId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("parent_id");
 
                     b.HasKey("DeptId");
@@ -87,18 +87,18 @@ namespace easycnc_core.Migrations
                 {
                     b.Property<int>("PermissionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("permission_id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PermissionId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PermissionId"));
 
                     b.Property<string>("PermissionCode")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("permission_code");
 
                     b.Property<string>("PermissionName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("permission_name");
 
                     b.HasKey("PermissionId");
@@ -124,17 +124,17 @@ namespace easycnc_core.Migrations
                 {
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("post_id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PostId"));
 
                     b.Property<string>("PostCode")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("post_code");
 
                     b.Property<string>("PostName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("post_name");
 
                     b.HasKey("PostId");
@@ -146,17 +146,17 @@ namespace easycnc_core.Migrations
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("role_id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoleId"));
 
                     b.Property<string>("RoleCode")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("role_code");
 
                     b.Property<string>("RoleName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("role_name");
 
                     b.HasKey("RoleId");
@@ -181,11 +181,11 @@ namespace easycnc_core.Migrations
             modelBuilder.Entity("easycnc_core.Areas.System.Models.RolePermission", b =>
                 {
                     b.Property<int>("RoleId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("role_id");
 
                     b.Property<int>("PermissionId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("permission_id");
 
                     b.HasKey("RoleId", "PermissionId");
@@ -216,38 +216,39 @@ namespace easycnc_core.Migrations
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
                     b.Property<int?>("AddressId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("address_id");
 
                     b.Property<int>("DeptId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("dept_id");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("password");
 
                     b.Property<string>("Realname")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("realname");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("username");
 
                     b.HasKey("UserId");
 
                     b.HasIndex("AddressId")
-                        .IsUnique()
-                        .HasFilter("[address_id] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("DeptId");
 
@@ -257,22 +258,28 @@ namespace easycnc_core.Migrations
                         new
                         {
                             UserId = 1,
+                            AddressId = 1,
                             DeptId = 2,
                             Password = "$2a$10$kPaZzYn4dB0oUHwwOQ6Uuuwg48GBcS/3TbCn/CVMzJD70t.hIBgiy",
+                            Realname = "",
                             Username = "zhangsan"
                         },
                         new
                         {
                             UserId = 2,
+                            AddressId = 2,
                             DeptId = 3,
                             Password = "$2a$10$kPaZzYn4dB0oUHwwOQ6Uuuwg48GBcS/3TbCn/CVMzJD70t.hIBgiy",
+                            Realname = "",
                             Username = "lisi"
                         },
                         new
                         {
                             UserId = 3,
+                            AddressId = 3,
                             DeptId = 4,
                             Password = "$2a$10$kPaZzYn4dB0oUHwwOQ6Uuuwg48GBcS/3TbCn/CVMzJD70t.hIBgiy",
+                            Realname = "",
                             Username = "wangwu"
                         });
                 });
@@ -280,11 +287,11 @@ namespace easycnc_core.Migrations
             modelBuilder.Entity("easycnc_core.Areas.System.Models.UserRole", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("role_id");
 
                     b.HasKey("UserId", "RoleId");
@@ -320,29 +327,29 @@ namespace easycnc_core.Migrations
                 {
                     b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("address_id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AddressId"));
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("city");
 
                     b.Property<string>("County")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("county");
 
                     b.Property<string>("Detail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("detail");
 
                     b.Property<string>("Province")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("province");
 
                     b.HasKey("AddressId");
@@ -353,6 +360,22 @@ namespace easycnc_core.Migrations
                         new
                         {
                             AddressId = 1,
+                            City = "嘉兴市",
+                            County = "嘉善县",
+                            Detail = "罗星街道",
+                            Province = "浙江省"
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            City = "嘉兴市",
+                            County = "嘉善县",
+                            Detail = "罗星街道",
+                            Province = "浙江省"
+                        },
+                        new
+                        {
+                            AddressId = 3,
                             City = "嘉兴市",
                             County = "嘉善县",
                             Detail = "罗星街道",

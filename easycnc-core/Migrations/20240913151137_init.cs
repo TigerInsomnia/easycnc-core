@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -7,7 +8,7 @@
 namespace easycnc_core.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,9 +17,12 @@ namespace easycnc_core.Migrations
                 name: "address",
                 columns: table => new
                 {
-                    address_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    province = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    address_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    province = table.Column<string>(type: "text", nullable: false),
+                    city = table.Column<string>(type: "text", nullable: false),
+                    county = table.Column<string>(type: "text", nullable: false),
+                    detail = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,11 +33,11 @@ namespace easycnc_core.Migrations
                 name: "dept",
                 columns: table => new
                 {
-                    dept_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    dept_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    dept_code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    parent_id = table.Column<int>(type: "int", nullable: false)
+                    dept_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    dept_name = table.Column<string>(type: "text", nullable: true),
+                    dept_code = table.Column<string>(type: "text", nullable: true),
+                    parent_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,10 +48,10 @@ namespace easycnc_core.Migrations
                 name: "permission",
                 columns: table => new
                 {
-                    permission_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    permission_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    permission_code = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    permission_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    permission_name = table.Column<string>(type: "text", nullable: false),
+                    permission_code = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,10 +62,10 @@ namespace easycnc_core.Migrations
                 name: "post",
                 columns: table => new
                 {
-                    post_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    post_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    post_code = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    post_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    post_name = table.Column<string>(type: "text", nullable: true),
+                    post_code = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,10 +76,10 @@ namespace easycnc_core.Migrations
                 name: "role",
                 columns: table => new
                 {
-                    role_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    role_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    role_code = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    role_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    role_name = table.Column<string>(type: "text", nullable: true),
+                    role_code = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,13 +90,13 @@ namespace easycnc_core.Migrations
                 name: "users",
                 columns: table => new
                 {
-                    user_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    realname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    address_id = table.Column<int>(type: "int", nullable: true),
-                    dept_id = table.Column<int>(type: "int", nullable: false)
+                    user_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    username = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    realname = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    password = table.Column<string>(type: "text", nullable: true),
+                    address_id = table.Column<int>(type: "integer", nullable: true),
+                    dept_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,8 +118,8 @@ namespace easycnc_core.Migrations
                 name: "role_permission",
                 columns: table => new
                 {
-                    role_id = table.Column<int>(type: "int", nullable: false),
-                    permission_id = table.Column<int>(type: "int", nullable: false)
+                    role_id = table.Column<int>(type: "integer", nullable: false),
+                    permission_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,8 +142,8 @@ namespace easycnc_core.Migrations
                 name: "user_role",
                 columns: table => new
                 {
-                    user_id = table.Column<int>(type: "int", nullable: false),
-                    role_id = table.Column<int>(type: "int", nullable: false)
+                    user_id = table.Column<int>(type: "integer", nullable: false),
+                    role_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -156,6 +160,16 @@ namespace easycnc_core.Migrations
                         principalTable: "users",
                         principalColumn: "user_id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "address",
+                columns: new[] { "address_id", "city", "county", "detail", "province" },
+                values: new object[,]
+                {
+                    { 1, "嘉兴市", "嘉善县", "罗星街道", "浙江省" },
+                    { 2, "嘉兴市", "嘉善县", "罗星街道", "浙江省" },
+                    { 3, "嘉兴市", "嘉善县", "罗星街道", "浙江省" }
                 });
 
             migrationBuilder.InsertData(
@@ -203,9 +217,9 @@ namespace easycnc_core.Migrations
                 columns: new[] { "user_id", "address_id", "dept_id", "password", "realname", "username" },
                 values: new object[,]
                 {
-                    { 1, null, 2, "$2a$10$kPaZzYn4dB0oUHwwOQ6Uuuwg48GBcS/3TbCn/CVMzJD70t.hIBgiy", null, "zhangsan" },
-                    { 2, null, 3, "$2a$10$kPaZzYn4dB0oUHwwOQ6Uuuwg48GBcS/3TbCn/CVMzJD70t.hIBgiy", null, "lisi" },
-                    { 3, null, 4, "$2a$10$kPaZzYn4dB0oUHwwOQ6Uuuwg48GBcS/3TbCn/CVMzJD70t.hIBgiy", null, "wangwu" }
+                    { 1, 1, 2, "$2a$10$kPaZzYn4dB0oUHwwOQ6Uuuwg48GBcS/3TbCn/CVMzJD70t.hIBgiy", "", "zhangsan" },
+                    { 2, 2, 3, "$2a$10$kPaZzYn4dB0oUHwwOQ6Uuuwg48GBcS/3TbCn/CVMzJD70t.hIBgiy", "", "lisi" },
+                    { 3, 3, 4, "$2a$10$kPaZzYn4dB0oUHwwOQ6Uuuwg48GBcS/3TbCn/CVMzJD70t.hIBgiy", "", "wangwu" }
                 });
 
             migrationBuilder.InsertData(
@@ -233,8 +247,7 @@ namespace easycnc_core.Migrations
                 name: "IX_users_address_id",
                 table: "users",
                 column: "address_id",
-                unique: true,
-                filter: "[address_id] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_users_dept_id",

@@ -1,3 +1,5 @@
-/easycnc-core/bin
-/easycnc-core/obj
-/.vs
+/easycnc-core/bin/
+/easycnc-core/obj/
+/.vs/
+obj
+bin
