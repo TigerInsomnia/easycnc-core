@@ -1,0 +1,57 @@
+
+.header-bg{
+    background-color: #4D7A97!important;
+}
+
+.x-btn-icon-el {
+    display: none;
+    vertical-align: middle;
+    text-align: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+}
+.logo-title{
+    font-size: 23px!important;
+    font-weight: 300!important;
+    color:whitesmoke;
+    line-height: 40px;
+    margin-left: 10px;
+}
+
+.x-tree-node-text {
+    padding-left: 3px;
+    color: #282f3f;
+    text-decoration:none;
+}
+
+/* .x-layer {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    overflow: auto!important;
+} */
+.x-grid-cell-inner {
+    position: relative;
+    text-overflow: ellipsis;
+    padding: 5px 6px 5px;
+}
+.x-panel-default-framed {
+
+    border-width: 0!important;
+
+}
+.x-tab-default .x-tab-close-btn {
+    top: 2px;
+    right: 2px;
+    width: 11px!important;
+    height: 11px!important;
+  
+}
+.x-tab-default.x-tab-active .x-tab-close-btn {
+    background-position: 0 -11px;
+}
+.abc{
+
+}

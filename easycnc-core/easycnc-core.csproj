@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>easycnc_core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Seed\**" />
+    <Content Remove="Seed\**" />
+    <EmbeddedResource Remove="Seed\**" />
+    <None Remove="Seed\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Auth\Views\login.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.20">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.17" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.18" />
+    <PackageReference Include="WorkflowCore" Version="3.10.0" />
+    <PackageReference Include="WorkflowCore.Persistence.EntityFramework" Version="3.10.0" />
+    <PackageReference Include="WorkflowCore.Persistence.PostgreSQL" Version="3.10.0" />
+    <PackageReference Include="WorkflowCore.Persistence.SqlServer" Version="3.10.0" />
+    <PackageReference Include="WorkflowCore.Users" Version="3.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Auth\Data\" />
+    <Folder Include="Areas\Auth\Models\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Workflow\Interface\" />
+    <Folder Include="Workflow\Service\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Auth\Views\Auth\login.cshtml" />
+    <None Include="E:\Project\easycnc-core\easycnc-core\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="E:\Project\easycnc-core\easycnc-core\.editorconfig" />
+  </ItemGroup>
+
+</Project>
