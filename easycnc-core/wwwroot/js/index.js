@@ -55,8 +55,9 @@ Ext.onReady(function () {
                                 expanded: true,
                                 text:'功能菜单',
                                 children: [
-                                    { id: "01", text: "用户管理", leaf: true, href: '#' },
-                                    { id: "02", text: "密码修改", leaf: true, href: '#' }
+                                    { id: "01", text: "用户管理", leaf: true, href: '/user' },
+                                    { id: "02", text: "密码修改", leaf: true, href: '#' },
+                                    { id: "03", text: "菜单管理", leaf: true, href: '#' }
                                 ]
                             }
                         }
